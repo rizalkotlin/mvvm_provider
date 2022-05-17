@@ -11,8 +11,13 @@ class UserProvider with ChangeNotifier {
   Stream<bool> get loadingStream => loadingStreamController.stream;
   Sink<bool> get loadingSink => loadingStreamController.sink;
 
+  ///stream untuk melisten data yang telah di kirim ke sink
   Stream<String> get idStream => idStreamController.stream;
+
   Sink<String> get idSink => idStreamController.sink;
+  //untuk mengalirkan data ke dalam stream controller
+  ///secara realtime
+
   GlobalKey<RefreshIndicatorState> refresherKey =
       GlobalKey<RefreshIndicatorState>();
   UserState userState = UserState();
