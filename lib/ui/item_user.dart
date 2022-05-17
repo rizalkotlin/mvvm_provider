@@ -5,16 +5,16 @@ import 'package:mvvm_provider/screens/form_user_screen.dart';
 import 'package:provider/provider.dart';
 
 class ItemUser extends StatelessWidget {
-  final User user;
+  final User? user;
 
-  const ItemUser({Key key, @required this.user}) : super(key: key);
+  const ItemUser({Key? key, @required this.user}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context);
     return ListTile(
       leading: CircleAvatar(
         child: Text(
-          '${user?.displayName?.substring(0, 1)?.toUpperCase()}',
+          '${user?.displayName?.substring(0, 1).toUpperCase()}',
           style: TextStyle(
             color: Colors.white,
             fontSize: 14,
@@ -35,10 +35,10 @@ class ItemUser extends StatelessWidget {
       trailing: IconButton(
           icon: Icon(Icons.delete),
           onPressed: () {
-            userProvider?.delete(user?.idUser);
+            userProvider.delete(user!.idUser ?? '');
           }),
       onTap: () {
-        userProvider?.idSink?.add(user?.idUser);
+        userProvider.idSink.add(user!.idUser ?? '');
         Navigator.pushNamed(context, FormUserScreen.routeName);
       },
     );

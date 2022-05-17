@@ -80,7 +80,7 @@ class UserProvider with ChangeNotifier {
     getData(start: false);
     loadingSink.add(false);
     notifyListeners();
-    return null;
+    return user.idUser!;
   }
 
   Future<String> delete(String id) async {

@@ -1,9 +1,9 @@
 class User {
-  String idUser;
-  String displayName;
-  String email;
-  String phoneNumber;
-  String address;
+  String? idUser;
+  String? displayName;
+  String? email;
+  String? phoneNumber;
+  String? address;
 
   ///contruktor class user
   User({

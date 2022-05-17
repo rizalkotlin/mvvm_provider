@@ -18,7 +18,7 @@ class ListUserScreen extends StatelessWidget {
         elevation: 2.5,
       ),
       body: RefreshIndicator(
-        key: userProvider?.refresherKey,
+        key: userProvider.refresherKey,
         onRefresh: userProvider.handleRefresh,
         child: ListView.builder(
           itemCount: items.length,
@@ -29,7 +29,7 @@ class ListUserScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
-          userProvider?.idSink?.add(null);
+          userProvider.idSink.add("");
           Navigator.pushNamed(context, FormUserScreen.routeName);
         },
       ),

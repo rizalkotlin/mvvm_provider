@@ -9,11 +9,12 @@ class UserRepositoryApi extends UserRepository {
   Future<List<User>> getData({bool start = true}) async {
     var url = "";
     var headers = {};
-    await http.get(Uri.tryParse(url), headers: headers).then((response) {
-      if (response.statusCode == 200) {
-        var body = json.decode(response.body);
-      }
-    });
+    // await http.get(Uri.tryParse(url), headers: headers).then((response) {
+    //   if (response.statusCode == 200) {
+    //     var body = json.decode(response.body);
+    //   }
+    // });
+    return [];
   }
 
   @override

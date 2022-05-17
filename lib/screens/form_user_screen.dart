@@ -13,14 +13,14 @@ class _FormUserScreenState extends State<FormUserScreen>
     with WidgetsBindingObserver {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  UserProvider userProvider;
+  UserProvider? userProvider;
   User user = User.empty();
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
       userProvider = Provider.of<UserProvider>(context, listen: false);
-      setState(() => user = userProvider?.userState?.user);
+      setState(() => user = userProvider!.userState.user);
     });
     super.initState();
   }
@@ -42,26 +42,26 @@ class _FormUserScreenState extends State<FormUserScreen>
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                if (userProvider?.isLoading != null && !userProvider.isLoading)
+                if (userProvider?.isLoading != null && !userProvider!.isLoading)
                   TextFormField(
-                    initialValue: '${user?.displayName ?? ''}',
+                    initialValue: '${user.displayName ?? ''}',
                     onSaved: (val) => setState(() {
-                      user?.displayName = val;
+                      user.displayName = val;
                       print('user');
                     }),
-                    validator: (String val) =>
-                        val.length >= 5 ? null : 'Minimal 5 Karekter',
+                    validator: (val) =>
+                        val!.length >= 5 ? null : 'Minimal 5 Karekter',
                     decoration: InputDecoration(
                       hintText: 'Masukkan Nama Lengkap',
                       labelText: 'Nama Lengkap',
                     ),
                   ),
                 SizedBox(height: 14),
-                if (userProvider?.isLoading != null && !userProvider.isLoading)
+                if (userProvider?.isLoading != null && !userProvider!.isLoading)
                   TextFormField(
-                    initialValue: '${user?.email ?? ''}',
-                    onSaved: (String val) => setState(() => user?.email = val),
-                    validator: (String val) => val.contains('@')
+                    initialValue: '${user.email ?? ''}',
+                    onSaved: (val) => setState(() => user.email = val),
+                    validator: (val) => val!.contains('@')
                         ? null
                         : 'Format harus menggunakan tanda\'@\'',
                     decoration: InputDecoration(
@@ -70,13 +70,12 @@ class _FormUserScreenState extends State<FormUserScreen>
                     ),
                   ),
                 SizedBox(height: 14),
-                if (userProvider?.isLoading != null && !userProvider.isLoading)
+                if (userProvider?.isLoading != null && !userProvider!.isLoading)
                   TextFormField(
-                    initialValue: '${user?.address ?? ''}',
-                    onSaved: (String val) =>
-                        setState(() => user?.address = val),
-                    validator: (String val) =>
-                        val.length >= 5 ? null : 'Minimal 5 Karekter',
+                    initialValue: '${user.address ?? ''}',
+                    onSaved: (val) => setState(() => user.address = val),
+                    validator: (val) =>
+                        val!.length >= 5 ? null : 'Minimal 5 Karekter',
                     minLines: 4,
                     maxLines: 10,
                     maxLength: 225,
@@ -100,7 +99,7 @@ class _FormUserScreenState extends State<FormUserScreen>
 
   onSAve() {
     final form = formKey.currentState;
-    if (form.validate()) {
+    if (form!.validate()) {
       form.save();
       userProvider?.save(user);
       Navigator?.pop(context);

@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:mvvm_provider/commum_utils/podos/users.dart';
 import 'package:mvvm_provider/commum_utils/repositories/user_repository.dart';
 
@@ -32,16 +34,16 @@ class UserDummy extends UserRepository {
   ///@return String idUser
   ///#param User user
   @override
-  Future<String> save(User user) {
-    if (user?.idUser != null) {
+  Future<String> save(User user) async {
+    if (user.idUser != null) {
       int index = listUser.indexOf(user);
       listUser.removeAt(index);
       listUser.insert(index, user);
     } else {
-      user?.idUser = '${listUser.length}';
+      user.idUser = '${listUser.length}';
       listUser.add(user);
     }
-    return null;
+    return user.idUser!;
   }
 
   ///Function for delete data user by id
@@ -49,12 +51,12 @@ class UserDummy extends UserRepository {
   ///#param String id
   @override
   Future<String> delete(String id) async {
-    String docID;
-    var user =
-        listUser.singleWhere((user) => user.idUser == id, orElse: () => null);
+    String docID = "";
+    var user = listUser.singleWhere((user) => user.idUser == id,
+        orElse: () => User.empty());
     if (user != null) {
       listUser.remove(user);
-      docID = user.idUser;
+      docID = user.idUser!;
     }
     return docID;
   }
